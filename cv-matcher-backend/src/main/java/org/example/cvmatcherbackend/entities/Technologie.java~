@@ -1,0 +1,10 @@
+package org.example.cvmatcherbackend.entities;
+
+public class Technologie {
+
+    public Long id;
+    public String nom;
+
+    public 
+
+}

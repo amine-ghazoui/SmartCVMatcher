@@ -1,0 +1,4 @@
+package org.example.cvmatcherbackend.repositories;
+
+public interface CvInfoRepository {
+}

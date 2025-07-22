@@ -1,0 +1,4 @@
+package org.example.cvmatcherbackend.dtos;
+
+public class CompetenceDTO {
+}

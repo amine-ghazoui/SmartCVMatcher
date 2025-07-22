@@ -1,0 +1,17 @@
+package org.example.cvmatcherbackend.entities;
+
+import jakarta.persistence.Entity;
+import lombok.*;
+
+@Entity
+@Data
+@AllArgsConstructor @NoArgsConstructor @Getter @Setter
+public class Langues {
+
+    public Long id;
+    public String nom;
+
+    public
+
+
+}
