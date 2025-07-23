@@ -8,7 +8,7 @@ import java.util.List;
 @Getter @Setter
 public class CvDTO {
 
-    public Long Id;
+    public Long id;
     public String nom;
     public String titre;
     public String email;

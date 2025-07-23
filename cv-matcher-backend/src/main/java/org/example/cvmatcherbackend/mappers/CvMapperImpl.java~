@@ -54,7 +54,7 @@ public class CvMapperImpl {
                             .collect(Collectors.toList())
             );
         }
-        
+
         return cvDTO;
     }
 

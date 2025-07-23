@@ -6,5 +6,5 @@ public class ExperienceDTO {
 
     public String entreprise;
     public String description;
-    public String technologies;
+    public String technologie;
 }

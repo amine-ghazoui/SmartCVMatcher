@@ -64,51 +64,41 @@ public class CvMapperImpl {
 
         // Mapping compétences
         if (cvDTO.getCompetences() != null) {
-            List<Competence> competences = cvDTO.getCompetences().stream().map(dto -> {
-                Competence competence = fromCompetenceDTO(dto);
-                competence.setCvInfo(cvInfo); // important !
-                return competence;
-            }).collect(Collectors.toList());
+            List<Competence> competences = cvDTO.getCompetences().stream()
+                    .map(this::fromCompetenceDTO)
+                    .collect(Collectors.toList());
             cvInfo.setCompetences(competences);
         }
 
         // Mapping langues
         if (cvDTO.getLangues() != null) {
-            List<Langues> langues = cvDTO.getLangues().stream().map(dto -> {
-                Langues langue = fromLanguesDTO(dto);
-                langue.setCvInfo(cvInfo);
-                return langue;
-            }).collect(Collectors.toList());
+            List<Langues> langues = cvDTO.getLangues().stream()
+                    .map(this::fromLanguesDTO)
+                    .collect(Collectors.toList());
             cvInfo.setLangues(langues);
         }
 
         // Mapping diplomes
         if (cvDTO.getDiplomes() != null) {
-            List<Diplomes> diplomes = cvDTO.getDiplomes().stream().map(dto -> {
-                Diplomes diplome = fromDiplomesDTO(dto);
-                diplome.setCvInfo(cvInfo);
-                return diplome;
-            }).collect(Collectors.toList());
+            List<Diplomes> diplomes = cvDTO.getDiplomes().stream()
+                    .map(this::fromDiplomesDTO)
+                    .collect(Collectors.toList());
             cvInfo.setDiplomes(diplomes);
         }
 
         // Mapping expériences
         if (cvDTO.getExperiences() != null) {
-            List<Experience> experiences = cvDTO.getExperiences().stream().map(dto -> {
-                Experience experience = fromExperienceDTO(dto);
-                experience.setCvInfo(cvInfo);
-                return experience;
-            }).collect(Collectors.toList());
+            List<Experience> experiences = cvDTO.getExperiences().stream()
+                    .map(this::fromExperienceDTO)
+                    .collect(Collectors.toList());
             cvInfo.setExperiences(experiences);
         }
 
         // Mapping projets
         if (cvDTO.getProjets() != null) {
-            List<Projet> projets = cvDTO.getProjets().stream().map(dto -> {
-                Projet projet = fromProjetDTO(dto);
-                projet.setCvInfo(cvInfo);
-                return projet;
-            }).collect(Collectors.toList());
+            List<Projet> projets = cvDTO.getProjets().stream()
+                    .map(this::fromProjetDTO)
+                    .collect(Collectors.toList());
             cvInfo.setProjets(projets);
         }
 

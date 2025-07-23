@@ -32,14 +32,14 @@ Tu es un expert en extraction d'informations depuis les CVs. Voici un exemple de
     {{
       "entreprise": "...",
       "description": "...",
-      "technologie": "..., ..., ..."
+      "technologie": "..."
     }}
   ],
   "projets": [
     {{
       "titre": "...",
       "description": "...",
-      "technologie": "..., ..., ..."
+      "technologie": "..."
     }}
   ],
   "diplomes": [{{ "intitule": "..." }}, {{ "intitule": "..." }}],
@@ -47,11 +47,13 @@ Tu es un expert en extraction d'informations depuis les CVs. Voici un exemple de
 }}
 
 **Consignes importantes :**
+- Donne uniquement le JSON brut, sans aucune balise ``` ou ```json autour, ni explication.
+- Pour 'langues', donne une liste d’objets, chacun sous la forme {{ "nom": "..." }} (et non une liste de chaînes).
+- Pour le champ 'technologie' dans 'experiences' et 'projets', donne toujours une chaîne de caractères (jamais une liste), même s'il y a plusieurs technologies : sépare-les par une virgule et un espace (exemple : "Java, Spring Boot, Angular").
 - Résume le champ 'profil' en 2 à 3 phrases maximum, en allant à l'essentiel.
 - Pour chaque 'description' (expériences et projets), fais un résumé très court (1 à 2 phrases maximum).
 - Pour 'competences', liste toutes les compétences et outils mentionnés, même s'ils sont secondaires.
 - Pour 'langues', donne uniquement la liste des langues, sans indiquer le niveau.
-- Donne uniquement le JSON demandé, sans aucune explication.
 
 Voici le contenu du CV à analyser :
 {cv_text}
@@ -103,7 +105,7 @@ def envoyer_vers_spring_boot(data_json):
 
 # === Lancement ===
 if __name__ == "__main__":
-    chemin_cv = "D:/SmartCVMatcher/cv-parser-V2/cv-downloaded/CV_OUSSAMA_TOUIJER.pdf"  # 📝 Modifie le chemin
+    chemin_cv = "D:\\SmartCVMatcher\\cv-parser\\cv-downloaded\\CV_OUSSAMA_TOUIJER.pdf"  # 📝 Modifie le chemin
     resultat = process_cv(chemin_cv)
 
     if resultat:

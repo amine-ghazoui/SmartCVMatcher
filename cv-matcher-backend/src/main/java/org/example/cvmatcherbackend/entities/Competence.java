@@ -6,6 +6,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
@@ -15,7 +18,6 @@ public class Competence {
     private Long id;
     private String nom;
 
-    @ManyToOne
-    @JoinColumn(name = "cv_id")
-    private CvInfo cvInfo;
+    @ManyToMany(mappedBy = "competences" , fetch = FetchType.EAGER)
+    private List<CvInfo> cvInfo = new ArrayList<>();
 }

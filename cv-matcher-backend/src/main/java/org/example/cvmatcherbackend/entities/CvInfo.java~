@@ -20,7 +20,7 @@ public class CvInfo {
     private String telephone;
     private String profil;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "cv_competences",
             joinColumns = @JoinColumn(name = "cv_info_id"),

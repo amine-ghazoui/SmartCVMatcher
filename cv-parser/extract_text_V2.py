@@ -25,36 +25,38 @@ Tu es un expert en extraction d'informations depuis les CVs. Voici un exemple de
   "nom": "...",
   "titre": "...",
   "email": "...",
-  "téléphone": "...",
+  "telephone": "...",
   "profil": "...",
-  "competences": ["...", "..."],
+  "competences": [{{ "nom": "..." }}, {{ "nom": "..." }}],
   "experiences": [
     {{
       "entreprise": "...",
       "description": "...",
-      "outils": ["...", "..."]
+      "technologie": "..."
     }}
   ],
   "projets": [
     {{
       "titre": "...",
       "description": "...",
-      "outils": ["...", "..."]
+      "technologie": "..."
     }}
   ],
-  "diplômes": ["..."],
-  "langues": {{
-    "français": "courant",
-    "anglais": "débutant"
-  }}
+  "diplomes": [{{ "intitule": "..." }}, {{ "intitule": "..." }}],
+  "langues": [{{ "nom": "..." }}, {{ "nom": "..." }}]
 }}
 
-Voici le contenu du CV à analyser :
-\"\"\"
-{cv_text}
-\"\"\"
+**Consignes importantes :**
+- Donne uniquement le JSON brut, sans aucune balise ``` ou ```json autour, ni explication.
+- Pour 'langues', donne une liste d’objets, chacun sous la forme {{ "nom": "..." }} (et non une liste de chaînes).
+- Pour le champ 'technologie' dans 'experiences' et 'projets', donne toujours une chaîne de caractères (jamais une liste), même s'il y a plusieurs technologies : sépare-les par une virgule et un espace (exemple : "Java, Spring Boot, Angular").
+- Résume le champ 'profil' en 2 à 3 phrases maximum, en allant à l'essentiel.
+- Pour chaque 'description' (expériences et projets), fais un résumé très court (1 à 2 phrases maximum).
+- Pour 'competences', liste toutes les compétences et outils mentionnés, même s'ils sont secondaires.
+- Pour 'langues', donne uniquement la liste des langues, sans indiquer le niveau.
 
-Donne uniquement le JSON demandé, sans aucune explication.
+Voici le contenu du CV à analyser :
+{cv_text}
 """
 
 # === Étape 3 : Envoi à l'API Kimi K2 (via Groq) ===
@@ -91,8 +93,18 @@ def process_cv(pdf_path):
         return None
 
 # === Exemple d'utilisation ===
+SPRING_BOOT_URL = "http://localhost:8080/api/cvs"  # À adapter si besoin
+
+def envoyer_au_backend(json_cv):
+    try:
+        response = requests.post(SPRING_BOOT_URL, json=json_cv)
+        response.raise_for_status()
+        print(f"✅ Envoyé au backend : {response.text}")
+    except Exception as e:
+        print(f"❌ Erreur lors de l'envoi au backend : {e}")
+
 if __name__ == "__main__":
-    dossier_cvs = "cv-downloaded"  # Chemin du dossier contenant les CVs
+    dossier_cvs = "cv-parser/cv-downloaded"  # Chemin du dossier contenant les CVs
     resultats = []
 
     # Parcours tous les fichiers PDF du dossier
@@ -107,6 +119,7 @@ if __name__ == "__main__":
                 nom_json = nom_fichier.replace(".pdf", ".json")
                 with open(f"resultat_{nom_json}", "w", encoding="utf-8") as f:
                     json.dump(resultat, f, indent=2, ensure_ascii=False)
+                envoyer_au_backend(resultat)
             else:
                 print(f"Erreur pour le fichier : {chemin_cv}")
 

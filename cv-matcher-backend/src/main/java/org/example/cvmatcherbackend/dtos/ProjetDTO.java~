@@ -6,5 +6,5 @@ public class ProjetDTO {
 
     public String titre;
     public String description;
-    public String technologies;
+    public String technologie;
 }
